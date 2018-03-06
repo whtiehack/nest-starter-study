@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+<style type="text/css">
+    html, body{
+        height: 100%;
+        width: 100%
+    }
+</style>
+<script type="text/javascript">
+    var base = window.location.href;
+    function nextPage(){
+        window.open(base, new Date().getTime());
+        setInterval("window.close()", 3000);
+    }
+    function setContenPage(){
+        $(document).attr('title','LVT-'+getTimeStr());
+        $("#iframe").attr("src", "http://news.baidu.com/?t="+new Date().getTime());
+        var times = randomNum();
+        while(times < 10*1000){
+            times = randomNum();
+        }
+        setInterval("nextPage()", times);
+    }
+    function randomNum(){
+        return Math.ceil(Math.random()*1000*30);
+    }
+    function getTimeStr(){
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        return h+':'+m+':'+s;
+    }
+    //获取内容
+    setContenPage();
+</script>
+<body>
+
+<iframe id="iframe" height="100%" width="100%" src="http://news.baidu.com"/>
+
+</body>
+</html>
