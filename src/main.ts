@@ -16,7 +16,7 @@ async function bootstrap() {
     const app = await NestFactory.create(ApplicationModule/*, instance as any*/);
     app.useWebSocketAdapter(new WsAdapter());
     app.use('/public',express.static(path.join(__dirname,'../', 'public')));
-    app.set('views', __dirname + '/views');
+    app.set('views', path.join(__dirname,'../', 'views'));
     app.set('view engine', 'jade');
     // global-scoped exception filter.
     //   app.useGlobalFilters(new HttpExceptionFilter());

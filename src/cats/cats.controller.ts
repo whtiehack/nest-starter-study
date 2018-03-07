@@ -13,6 +13,7 @@ import {Roles} from "../roles.decorator";
 import {LoggingInterceptor} from "../interceptors/logging.interceptor";
 import {TransformInterceptor} from "../interceptors/transform.interceptor";
 import {CacheInterceptor} from "../interceptors/cache.interceptor";
+import {Cat as CatEntity} from './cat.entity';
 
 @Controller('cats')
 @UseInterceptors(LoggingInterceptor)
@@ -22,7 +23,23 @@ export class CatsController {
     @Post()
  //   @Roles('admin')
     async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
-        this.catsService.create(createCatDto);
+        return this.catsService.create(createCatDto);
+    }
+
+
+
+    @Post('/seq')
+    //   @Roles('admin')
+    async createSequelize(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
+        return this.catsService.createSequelize(createCatDto);
+    }
+
+    @Get('/seq')
+    @UseGuards(RolesGuard)
+    //   @ReflectMetadata('roles', ['admin'])
+    @UseInterceptors(TransformInterceptor)
+    async findAllSequelize(): Promise<Cat[]> {
+        return this.catsService.findAllSequelize();
     }
 
     @Get()
