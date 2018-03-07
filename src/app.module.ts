@@ -1,4 +1,4 @@
-import {MiddlewaresConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
+import {MiddlewaresConsumer, Module, NestModule, OnModuleDestroy, OnModuleInit, RequestMethod} from '@nestjs/common';
 import {AppController} from './app.controller';
 import {CatsModule} from "./cats/cats.module";
 import {CatsService} from "./cats/cats.service";
@@ -51,9 +51,16 @@ const linkTypeDefs = `
     //    MongooseModule.forRoot('mongodb://localhost/mytestdb')
     ],
 })
-export class ApplicationModule implements NestModule{
+export class ApplicationModule implements NestModule,OnModuleInit, OnModuleDestroy{
     constructor(private catsService:CatsService,private readonly graphQLFactory: GraphQLFactory) {
     }
+    onModuleInit() {
+        console.log(`ApplicationModule Module's initialized...`);
+    }
+    onModuleDestroy() {
+        console.log(`ApplicationModule Module's destroyed...`);
+    }
+
     configure(consumer: MiddlewaresConsumer): void {
         // consumer.apply(LoggerMiddleware).forRoutes(
         //     { path: '/cats', method: RequestMethod.GET },

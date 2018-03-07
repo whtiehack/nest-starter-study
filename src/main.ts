@@ -14,6 +14,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
     const app:NestApplication = await NestFactory.create(ApplicationModule/*, instance as any*/);
+ //   app.setGlobalPrefix('v1');
     app.useWebSocketAdapter(new WsAdapter());
     app.use('/public',express.static(path.join(__dirname,'../', 'public')));
     app.set('views', path.join(__dirname,'../', 'views'));
@@ -27,6 +28,7 @@ async function bootstrap() {
 
     const options = new DocumentBuilder()
         .setTitle('Cats example')
+    //    .setBasePath('/v1')
         .setDescription('The cats API description')
         .setVersion('1.0')
         .addTag('cats')

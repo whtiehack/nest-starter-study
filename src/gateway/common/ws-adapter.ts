@@ -1,4 +1,4 @@
-import * as WebSocket from 'uws';
+import * as WebSocket from 'ws';
 // import * as WebSocket from 'ws';
 import { WebSocketAdapter } from '@nestjs/common';
 import { MessageMappingProperties } from '@nestjs/websockets';
@@ -9,6 +9,9 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 
 export class WsAdapter implements WebSocketAdapter {
+    constructor(){
+
+    }
     create(port: number) {
         return new WebSocket.Server({ port:3001 });
     }
