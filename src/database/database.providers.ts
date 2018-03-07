@@ -1,4 +1,6 @@
 import { createConnection } from 'typeorm';
+import * as mongoose from 'mongoose';
+
 
 export const databaseProviders = [
     {
@@ -17,4 +19,14 @@ export const databaseProviders = [
             "synchronize": true
         }),
     },
+    {
+        provide: 'MongooseDbConnectionToken',
+        useFactory: async () => {
+            (mongoose as any).Promise = global.Promise;
+            return await mongoose.connect('mongodb://localhost/mytestdb', {
+                useMongoClient: true,
+            });
+        },
+    },
+    
 ];

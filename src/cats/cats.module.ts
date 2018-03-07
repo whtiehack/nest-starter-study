@@ -7,11 +7,18 @@ import {AppController} from "../app.controller";
 import {asyncDbConnection, connectionProvider} from "./tokenProvider";
 import {MongooseModule} from "@nestjs/mongoose";
 import {CatSchema} from "./schemas/cats.schema";
+import {DatabaseModule} from "../database/database.module";
+import {catsProviders} from "./cats.providers";
 
 @Module({
     controllers: [CatsController],
-    imports: [MongooseModule.forFeature([{ name: 'Cat', schema: CatSchema }])],
-    components: [CatsService, connectionProvider,asyncDbConnection],
+    imports: [
+        DatabaseModule,
+    //    MongooseModule.forFeature([{ name: 'Cat', schema: CatSchema }])
+    ],
+    components: [CatsService, connectionProvider,asyncDbConnection,
+        ...catsProviders,
+    ],
     exports: [CatsService]
 })
 export class CatsModule implements NestModule {

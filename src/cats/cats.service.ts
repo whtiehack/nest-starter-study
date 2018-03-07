@@ -7,7 +7,7 @@ import { Model } from 'mongoose';
 
 @Component()
 export class CatsService {
-    constructor(@Inject('AsyncDbConnection') asyncConn, @InjectModel(CatSchema) private readonly catModel: Model<Cat>){
+    constructor(@Inject('AsyncDbConnection') asyncConn, /*@InjectModel(CatSchema)*/@Inject('CatModelToken') private readonly catModel: Model<Cat>){
         console.log('~~ async db connection',asyncConn);
     }
 

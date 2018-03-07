@@ -47,7 +47,9 @@ const linkTypeDefs = `
         AuthorsModule,
         AuthModule,
     //    TypeOrmModule.forRoot(),
-        CatsModule,PhotoModule,MongooseModule.forRoot('mongodb://localhost/mytestdb')],
+        CatsModule,PhotoModule,
+    //    MongooseModule.forRoot('mongodb://localhost/mytestdb')
+    ],
 })
 export class ApplicationModule implements NestModule{
     constructor(private catsService:CatsService,private readonly graphQLFactory: GraphQLFactory) {
