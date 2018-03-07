@@ -1,4 +1,4 @@
-import {NestFactory} from '@nestjs/core';
+import {NestApplication, NestFactory} from '@nestjs/core';
 import {ApplicationModule} from './app.module';
 import * as express from 'express';
 import {HttpExceptionFilter} from "./http-exception.filter";
@@ -8,12 +8,12 @@ import {CatsService} from "./cats/cats.service";
 import {CatsModule} from "./cats/cats.module";
 import * as path from "path";
 import {WsAdapter} from "./gateway/common/ws-adapter";
-
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 // const instance = express();
 // instance.use('/public', express.static('public'));
 
 async function bootstrap() {
-    const app = await NestFactory.create(ApplicationModule/*, instance as any*/);
+    const app:NestApplication = await NestFactory.create(ApplicationModule/*, instance as any*/);
     app.useWebSocketAdapter(new WsAdapter());
     app.use('/public',express.static(path.join(__dirname,'../', 'public')));
     app.set('views', path.join(__dirname,'../', 'views'));
@@ -24,7 +24,17 @@ async function bootstrap() {
     //     .select(ApplicationModule)
     //     .select(CatsModule);
     // console.log(`!~~ geted not found filter' ${notFoundExceptionFilter}`,notFoundExceptionFilter);
-    await app.listen(3000);
+
+    const options = new DocumentBuilder()
+        .setTitle('Cats example')
+        .setDescription('The cats API description')
+        .setVersion('1.0')
+        .addTag('cats')
+        .build();
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('/api', app, document);
+
+    await app.listen(3000,()=>console.log('~ run as https://127.0.0.1:3000'));
 }
 
 bootstrap();

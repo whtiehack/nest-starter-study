@@ -14,7 +14,10 @@ import {LoggingInterceptor} from "../interceptors/logging.interceptor";
 import {TransformInterceptor} from "../interceptors/transform.interceptor";
 import {CacheInterceptor} from "../interceptors/cache.interceptor";
 import {Cat as CatEntity} from './cat.entity';
+import {ApiUseTags} from "@nestjs/swagger";
+import {mixinCacheInterceptor} from "../interceptors/mixin-cache.interceptor";
 
+@ApiUseTags('cats')
 @Controller('cats')
 @UseInterceptors(LoggingInterceptor)
 export class CatsController {
@@ -50,14 +53,14 @@ export class CatsController {
         return this.catsService.findAll();
     }
 
-    @Get('/exception')
+    @Post('/exception')
     @UseFilters(new HttpExceptionFilter())
     async exception(@Body() createCatDto: CreateCatDto) {
         throw new ForbiddenException();
     }
 
     @Get('/cacheInterceptor')
-    @UseInterceptors(CacheInterceptor)
+    @UseInterceptors(mixinCacheInterceptor(()=>true))
     async getAllCached(): Promise<Cat[]> {
         return this.catsService.findAll();
     }

@@ -43,6 +43,13 @@
   version "3.0.1"
   resolved "http://registry.npm.taobao.org/@nestjs/mongoose/download/@nestjs/mongoose-3.0.1.tgz#11f67fa02ee93462d25d4998303cc3b8292d1ca6"
 
+"@nestjs/swagger@^1.1.4":
+  version "1.1.4"
+  resolved "http://registry.npm.taobao.org/@nestjs/swagger/download/@nestjs/swagger-1.1.4.tgz#89f25a49375fc4f6b1210c7b06d0ee98cef17581"
+  dependencies:
+    lodash "4.17.4"
+    swagger-ui-express "2.0.11"
+
 "@nestjs/testing@^4.5.5":
   version "4.6.1"
   resolved "http://registry.npm.taobao.org/@nestjs/testing/download/@nestjs/testing-4.6.1.tgz#82b63bfbe7cdadf0d126d0c8b169eef948a8aa17"
@@ -2072,6 +2079,10 @@ lodash.once@^4.0.0:
   version "4.1.1"
   resolved "http://registry.npm.taobao.org/lodash.once/download/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
 
+lodash@4.17.4:
+  version "4.17.4"
+  resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
 lodash@^4.14.0, lodash@^4.17.1, lodash@^4.17.4:
   version "4.17.5"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
@@ -3391,6 +3402,10 @@ supports-color@^5.2.0:
   resolved "http://registry.npm.taobao.org/supports-color/download/supports-color-5.2.0.tgz#b0d5333b1184dd3666cbe5aa0b45c5ac7ac17a4a"
   dependencies:
     has-flag "^3.0.0"
+
+swagger-ui-express@2.0.11:
+  version "2.0.11"
+  resolved "http://registry.npm.taobao.org/swagger-ui-express/download/swagger-ui-express-2.0.11.tgz#db331cf888640a93b7a5b06111b02907a4be9c35"
 
 symbol-observable@1.0.1:
   version "1.0.1"

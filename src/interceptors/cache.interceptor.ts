@@ -3,10 +3,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 @Interceptor()
-export class CacheInterceptor implements NestInterceptor {
+export abstract class CacheInterceptor implements NestInterceptor {
+    protected abstract readonly isCached: () => boolean;
+
+
     async intercept(dataOrRequest, context: ExecutionContext, stream$: Observable<any>): Promise<Observable<any>> {
-        const isCached = true;
-        if (isCached) {
+        if (this.isCached()) {
             return Observable.of([{a:1},{b:'c'}]);
         }
         return stream$;
