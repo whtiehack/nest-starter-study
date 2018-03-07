@@ -7,13 +7,15 @@ import {AppController, NotFoundExceptionFilter} from "./app.controller";
 import {CatsService} from "./cats/cats.service";
 import {CatsModule} from "./cats/cats.module";
 import * as path from "path";
+import {WsAdapter} from "./gateway/common/ws-adapter";
 
 // const instance = express();
 // instance.use('/public', express.static('public'));
 
 async function bootstrap() {
     const app = await NestFactory.create(ApplicationModule/*, instance as any*/);
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.useWebSocketAdapter(new WsAdapter());
+    app.use('/public',express.static(path.join(__dirname,'../', 'public')));
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     // global-scoped exception filter.

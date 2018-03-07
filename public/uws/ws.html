@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        const socket = new WebSocket('ws://localhost:3001');
+        socket.onopen = function() {
+            console.log('Connected');
+            socket.send(JSON.stringify({
+                type: 'events',
+                message: 'test',
+            }));
+            socket.onmessage = function(data) {
+                console.log(data);
+                document.write(JSON.stringify(data));
+            }
+        };
+    </script>
+</head>
+<body>
+
+</body>
+</html>

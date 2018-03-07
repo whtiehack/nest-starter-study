@@ -5,7 +5,7 @@ export const asyncDbConnection = {
     provide: 'AsyncDbConnection',
         useFactory: async () => {
             const connection = {a: 1, b: 2};
-            await new Promise((resolve)=>setTimeout(resolve,1500));
+            await new Promise((resolve)=>setTimeout(resolve,0));
             return connection;
         }
 };

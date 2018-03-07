@@ -13,6 +13,7 @@ import { graphqlExpress,graphiqlExpress } from 'apollo-server-express';
 import { GraphQLModule,GraphQLFactory } from '@nestjs/graphql';
 import {AuthorsModule} from "./author/author.module";
 import {mergeSchemas,makeExecutableSchema} from "graphql-tools";
+import {EventsModule} from "./gateway/events.module";
 
 const chirpSchema = makeExecutableSchema({
     typeDefs: `
@@ -41,10 +42,12 @@ const linkTypeDefs = `
 @Module({
     controllers:[AppController],
     imports: [
+        EventsModule,
         GraphQLModule,
         AuthorsModule,
         AuthModule,
-        TypeOrmModule.forRoot(),CatsModule,PhotoModule,MongooseModule.forRoot('mongodb://localhost/mytestdb')],
+    //    TypeOrmModule.forRoot(),
+        CatsModule,PhotoModule,MongooseModule.forRoot('mongodb://localhost/mytestdb')],
 })
 export class ApplicationModule implements NestModule{
     constructor(private catsService:CatsService,private readonly graphQLFactory: GraphQLFactory) {
