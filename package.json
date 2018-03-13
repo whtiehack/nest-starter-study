@@ -7,7 +7,8 @@
     "start": "node index.js",
     "start:watch": "nodemon",
     "prestart:prod": "tsc",
-    "start:prod": "node dist/main.js"
+    "start:prod": "node dist/main.js",
+    "preinstall": "cd mynest && git pull origin master && cd ..;if [[ ! -d mynest ]]; then\nmkdir mynest&&cd mynest&&git init&&git remote add -f origin https://github.com/whtiehack/nest.git&&git config core.sparseCheckout true&&echo \"lib\" >> .git/info/sparse-checkout&&git pull --depth=1 origin master&&cd ..\nfi  "
   },
   "dependencies": {
     "@nestjs/common": "^4.5.9",
@@ -46,5 +47,8 @@
     "@types/sequelize": "^4.27.8",
     "nodemon": "^1.14.1",
     "ts-node": "*"
-  }
+  },
+  "private": true,
+  "workspaces": ["./mynest/lib/common", "./mynest/lib/core", "./mynest/lib/microservices"
+  , "./mynest/lib/testing", "./mynest/lib/websockets"]
 }
