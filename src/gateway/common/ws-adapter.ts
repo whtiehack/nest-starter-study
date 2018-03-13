@@ -7,13 +7,14 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
+import * as http from "http";
 
 export class WsAdapter implements WebSocketAdapter {
-    constructor(){
+    constructor(private readonly server: http.Server,){
 
     }
     create(port: number) {
-        return new WebSocket.Server({ port:3001 });
+        return new WebSocket.Server({server:this.server});
     }
 
     bindClientConnect(server, callback: (...args: any[]) => void) {

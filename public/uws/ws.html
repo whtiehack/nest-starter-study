@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
-        const socket = new WebSocket('ws://localhost:3001');
+        const socket = new WebSocket('ws://localhost:3000');
         socket.onopen = function() {
             console.log('Connected');
             socket.send(JSON.stringify({
@@ -12,7 +12,7 @@
                 message: 'test',
             }));
             socket.onmessage = function(data) {
-                console.log(data);
+                console.log('onmessage',data);
                 document.write(JSON.stringify(data));
             }
         };
